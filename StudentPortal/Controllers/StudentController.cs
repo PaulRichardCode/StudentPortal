@@ -5,7 +5,10 @@ namespace StudentPortal.Controllers
 {
     public class StudentController : Controller
     {
-      
+        public StudentController()
+        {
+            
+        }
 
         [HttpGet]
         public IActionResult Add()
