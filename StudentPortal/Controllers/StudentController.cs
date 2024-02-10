@@ -7,7 +7,7 @@ namespace StudentPortal.Controllers
     {
         public StudentController()
         {
-            
+           
         }
 
         [HttpGet]
