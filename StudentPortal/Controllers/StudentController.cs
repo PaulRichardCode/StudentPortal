@@ -44,6 +44,8 @@ namespace StudentPortal.Controllers
         public async Task<IActionResult> List()
         {
            var students = await dbContext.Students.ToListAsync();
+
+            return View(students);
         }
 
     } 
