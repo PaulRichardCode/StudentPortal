@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentPortal.Data;
 using StudentPortal.Models;
+using StudentPortal.Models.Entities;
 
 namespace StudentPortal.Controllers
 {
     public class StudentController : Controller
     {
-        public StudentController()
+        private readonly ApplicationDbContext dbContext;
+
+        public StudentController(ApplicationDbContext dbContext)
         {
-           
+            this.dbContext = dbContext;
         }
 
         [HttpGet]
@@ -17,8 +21,18 @@ namespace StudentPortal.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AddStudentViewModel viewModel)
+        public async Task<IActionResult> Add(AddStudentViewModel viewModel)
         {
+            var student = new Student
+            {
+                Name = viewModel.Name,
+                Email = viewModel.Email,
+                Phone = viewModel.Phone,
+                Subscribed = viewModel.Subscribed
+            };
+
+            await dbContext.Students.AddAsync(student);
+            await dbContext.SaveChangesAsync();
             return View();
         }
     } 
