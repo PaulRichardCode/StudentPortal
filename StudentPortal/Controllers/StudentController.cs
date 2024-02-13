@@ -55,5 +55,21 @@ namespace StudentPortal.Controllers
 
             return View(student);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Student viewModel)
+        {
+            var student = await dbContext.Students.FindAsync(viewModel.Id);
+
+            if(student is not null)
+            {
+                student.Name = viewModel.Name;
+                student.Phone = viewModel.Phone;
+                student.Email = viewModel.Email;
+                student.Subscribed = viewModel.Subscribed;
+
+                await dbContext.SaveChangesAsync();
+            }
+        }
     } 
 }
