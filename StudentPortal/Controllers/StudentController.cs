@@ -70,6 +70,7 @@ namespace StudentPortal.Controllers
 
                 await dbContext.SaveChangesAsync();
             }
+            return RedirectToAction("List", "Students");
         }
     } 
 }
