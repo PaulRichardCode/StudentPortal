@@ -55,7 +55,7 @@ namespace StudentPortal.Controllers
 
             return View(student);
         }
-
+        //press update button come here
         [HttpPost]
         public async Task<IActionResult> Edit(Student viewModel)
         {
@@ -70,7 +70,23 @@ namespace StudentPortal.Controllers
 
                 await dbContext.SaveChangesAsync();
             }
-            return RedirectToAction("List", "Students");
+            return RedirectToAction("List", "Student");
         }
+        //pressed delete button come here
+        [HttpPost]
+        public async Task<IActionResult> Delete(Student viewModel) //student is an updated data e.g name 
+        {
+            //find the updated data
+            var student = await dbContext.Students
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == viewModel.Id);
+
+            if(student is not null)
+            {
+                dbContext.Students.Remove(viewModel);
+                await dbContext.SaveChangesAsync();
+            }
+            return RedirectToAction("List", "Student");
+        } 
     } 
 }
