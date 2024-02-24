@@ -39,7 +39,7 @@ namespace StudentPortal.Controllers
             return View();
         }
 
-        //RETRIVE DATA
+        //RETRIV
         [HttpGet]
         public async Task<IActionResult> List()
         {
